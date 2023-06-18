@@ -331,6 +331,7 @@ function doVAD() {
   // and ... do it sychronously !!! otherwise the variables may get alterd after this fcn
   curpos = vad_nextStartPos;
   tf.tidy(() => {
+    console.time('voice activity detection:');
     //get voice activity in current frame
     let x = tf.tensor2d(VAD_IMG).reshape([1, VAD_SIZE, N_MEL_FILTER, 1]);
 
@@ -357,6 +358,7 @@ function doVAD() {
         break;
       }
     }
+    console.timeEnd('voice activity detection:');
   });
 
   // new pos with some overlap
